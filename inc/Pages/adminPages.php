@@ -51,9 +51,9 @@ class adminPages extends baseController{
 				array(
 					'parent_slug' => 'basic_plugin', 
 					'page_title' => 'Manager Post',
-					'menu_title' => 'manager', 
+					'menu_title' => 'manager Post', 
 					'capability' => 'manage_options', 
-					'menu_slug' => 'cpt_other', 
+					'menu_slug' => 'master_plugin_cpt', 
 					'callback' => function() { return require_once("$this->plugin_path/templates/admin.php"); }, 
 					
 				)
