@@ -16,12 +16,10 @@
 if(!defined ('ABSPATH')){
     die;
 }
-require_once plugin_dir_path(__FILE__) .'codestar-framework/codestar-framework.php';
-
-//equire_once plugin_dir_path(__FILE__) .'custom-codestar.php';
+require_once plugin_dir_path(__FILE__) .'ctl-framework/ctl-framework.php';
 
 require_once plugin_dir_path(__FILE__) .'shortcode-generator.php';
-
+require_once plugin_dir_path(__FILE__) .'custom-framework.php';
 
 
 
