@@ -4,12 +4,14 @@ namespace Inc\Pages;
 use \Inc\Base\baseController;
 use \Inc\Api\SettingsApi;
 use Inc\Api\Callbacks\adminCallbacks;
+use Inc\Api\Callbacks\managerCallbacks;
 
 //passing to Init
 class adminPages extends baseController{
 
     public $settings;
 	public $callback;
+	public $callback_mg;
 	public $pages = array();
 	public $subpages = array();
 
@@ -17,7 +19,8 @@ class adminPages extends baseController{
 	public function register() 
 	{
 		$this->settings = new SettingsApi();
-		$this->callback = new adminCallbacks();
+		$this->callback = new adminCallbacks();       //calling class adminCallback (to use their funtion in program)
+		$this->callback_mg = new managerCallbacks();
 		$this->setPages();
 		$this->setSubPages();
 		$this->setSettings();
@@ -75,9 +78,19 @@ class adminPages extends baseController{
 			),
 			array(
 				'option_group' => 'admin_options_group',
-				'option_name' => 'fname'
+				'option_name' => 'fname',
+				'callback' => array($this->callback, 'fieldFirstName')
 			)
+
 		);
+
+		foreach($this->managers as $key => $value){
+			$args[]= array(
+				'option_group' => 'admin_options_group',
+				'option_name' => $key,
+				'callback' => array($this->callback_mg, 'checkboxSantize')
+			);
+		}
 
 		$this->settings->setSettings($args);
 	}
@@ -86,10 +99,9 @@ class adminPages extends baseController{
 		$args = array(
 			array(
 				'id' => 'admin_index',
-				'title' => 'settings',
-				'callback' => array($this->callback, 'adminSection'),
+				'title' => 'Manage Profile',
+				'callback' => array($this->callback_mg, 'adminSectionManager'),
 				'page'=> 'basic_plugin'                  
-
 				)
 		);
         //page value should be = menu_slug of page
@@ -119,8 +131,22 @@ class adminPages extends baseController{
 						'label_for' => 'text_example',
 						'class' => 'example-class'
 						)
-					)
+				)	
 		);
+
+		foreach($this->managers as $key => $value){
+			$args[]= array(
+				'id' => $key,
+				'title' => $value,
+				'callback' => array($this->callback_mg, 'checkboxField'),
+				'page'=> 'basic_plugin',                
+				'section' => 'admin_index',
+				'args' => array(
+					'label_for' => $key,
+					'class' => 'ui-toggle'
+					)
+				);
+		}
         //id value should be = option_name of page
 		$this->settings->setFields($args);
 	}

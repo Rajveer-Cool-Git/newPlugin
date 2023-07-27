@@ -3,25 +3,21 @@
      *@package sonuplugin
 */
 /*
-     Plugin Name: sonu plugin
-     Plugin URI :
-     Description : my first Plugin
-     Version : 5.1
-     Author URI :
-     License :
-     Text Domain : sonu plugin 
-*/
+  Plugin Name: sonu plugin
+  Plugin URI:  http://localhost/sonu/basicplugin/wp-admin/
+  Description: Basic Plugin
+  Version : 1.1
+  Author: Ruby
+  Author URI:   http://localhost/sonu/basicplugin/wp-admin/
+  License: 
+  License URI: 
+ */
+/** Configuration * */
 
 //checks absolute path
 if(!defined ('ABSPATH')){
     die;
 }
-require_once plugin_dir_path(__FILE__) .'codestar-framework/codestar-framework.php';
-
-require_once plugin_dir_path(__FILE__) .'shortcode-generator.php';
-//require_once plugin_dir_path(__FILE__) .'custom-framework.php';
-
-
 
 
 
